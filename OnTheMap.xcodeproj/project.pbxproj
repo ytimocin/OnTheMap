@@ -16,8 +16,6 @@
 		B7198F4A1B95B269008F32A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7198F491B95B269008F32A3 /* Images.xcassets */; };
 		B7198F4D1B95B269008F32A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7198F4B1B95B269008F32A3 /* LaunchScreen.xib */; };
 		B7198F591B95B26B008F32A3 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7198F581B95B26B008F32A3 /* OnTheMapTests.swift */; };
-		B71C0CA11BA9008D009F14AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71C0C9F1BA9008D009F14AF /* FBSDKCoreKit.framework */; };
-		B71C0CA21BA9008D009F14AF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71C0CA01BA9008D009F14AF /* FBSDKLoginKit.framework */; };
 		B7311FC21B9A6307006CD61D /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7311FC11B9A6307006CD61D /* UdacityClient.swift */; };
 		B7311FC61B9A63F2006CD61D /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7311FC51B9A63F2006CD61D /* UdacityConstants.swift */; };
 		B7311FC81B9A6FF0006CD61D /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7311FC71B9A6FF0006CD61D /* UdacityConvenience.swift */; };
@@ -26,6 +24,8 @@
 		B76670001BA5939300831031 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7666FFF1BA5939200831031 /* CollectionViewController.swift */; };
 		B76670021BA5961E00831031 /* UserLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */; };
 		B79EE9E01B9E139D00529819 /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79EE9DF1B9E139D00529819 /* ParseConvenience.swift */; };
+		B7A53F8F1BAA2CBD0090DC16 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */; };
+		B7A53F901BAA2CBD0090DC16 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */; };
 		B7A867981B9B7AD6004F80DE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A867971B9B7AD6004F80DE /* MapViewController.swift */; };
 		B7A8679A1B9B7FF1004F80DE /* OnTheMapUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A867991B9B7FF0004F80DE /* OnTheMapUser.swift */; };
 		B7A8679F1B9C3C67004F80DE /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A8679E1B9C3C67004F80DE /* ParseClient.swift */; };
@@ -56,8 +56,6 @@
 		B7198F521B95B26B008F32A3 /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7198F571B95B26B008F32A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7198F581B95B26B008F32A3 /* OnTheMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapTests.swift; sourceTree = "<group>"; };
-		B71C0C9F1BA9008D009F14AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../OnTheMap-master/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		B71C0CA01BA9008D009F14AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../OnTheMap-master/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		B7311FC11B9A6307006CD61D /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		B7311FC51B9A63F2006CD61D /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		B7311FC71B9A6FF0006CD61D /* UdacityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
@@ -66,6 +64,8 @@
 		B7666FFF1BA5939200831031 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B79EE9DF1B9E139D00529819 /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
+		B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		B7A867971B9B7AD6004F80DE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B7A867991B9B7FF0004F80DE /* OnTheMapUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapUser.swift; sourceTree = "<group>"; };
 		B7A8679E1B9C3C67004F80DE /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B71C0CA11BA9008D009F14AF /* FBSDKCoreKit.framework in Frameworks */,
-				B71C0CA21BA9008D009F14AF /* FBSDKLoginKit.framework in Frameworks */,
+				B7A53F8F1BAA2CBD0090DC16 /* FBSDKCoreKit.framework in Frameworks */,
+				B7A53F901BAA2CBD0090DC16 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,8 +155,8 @@
 		B7198F341B95B267008F32A3 = {
 			isa = PBXGroup;
 			children = (
-				B71C0C9F1BA9008D009F14AF /* FBSDKCoreKit.framework */,
-				B71C0CA01BA9008D009F14AF /* FBSDKLoginKit.framework */,
+				B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */,
+				B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */,
 				B7198F3F1B95B268008F32A3 /* OnTheMap */,
 				B7198F551B95B26B008F32A3 /* OnTheMapTests */,
 				B7198F3E1B95B268008F32A3 /* Products */,
@@ -467,6 +467,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)-master",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -481,6 +482,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)-master",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
