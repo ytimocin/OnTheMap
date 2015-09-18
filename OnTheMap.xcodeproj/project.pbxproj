@@ -20,6 +20,7 @@
 		B7311FC61B9A63F2006CD61D /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7311FC51B9A63F2006CD61D /* UdacityConstants.swift */; };
 		B7311FC81B9A6FF0006CD61D /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7311FC71B9A6FF0006CD61D /* UdacityConvenience.swift */; };
 		B7311FCA1B9AD07A006CD61D /* MapTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7311FC91B9AD079006CD61D /* MapTabBarViewController.swift */; };
+		B7318E971BAB7848007F1C36 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7318E961BAB7848007F1C36 /* Reachability.swift */; settings = {ASSET_TAGS = (); }; };
 		B7666FFE1BA56AB400831031 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7666FFD1BA56AB400831031 /* TableViewController.swift */; };
 		B76670001BA5939300831031 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7666FFF1BA5939200831031 /* CollectionViewController.swift */; };
 		B76670021BA5961E00831031 /* UserLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */; };
@@ -60,6 +61,7 @@
 		B7311FC51B9A63F2006CD61D /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		B7311FC71B9A6FF0006CD61D /* UdacityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
 		B7311FC91B9AD079006CD61D /* MapTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTabBarViewController.swift; sourceTree = "<group>"; };
+		B7318E961BAB7848007F1C36 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B7666FFD1BA56AB400831031 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B7666FFF1BA5939200831031 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				B70B29571B9E8D6500E902C2 /* ErrorTypes.swift */,
 				B7A867991B9B7FF0004F80DE /* OnTheMapUser.swift */,
+				B7318E961BAB7848007F1C36 /* Reachability.swift */,
 				B70B29551B9E8B5500E902C2 /* UserPins.swift */,
 				B709021B1B96660C00EBB627 /* Clients */,
 			);
@@ -265,7 +268,9 @@
 		B7198F351B95B267008F32A3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = basetech;
 				TargetAttributes = {
 					B7198F3C1B95B268008F32A3 = {
@@ -335,6 +340,7 @@
 				B70B29581B9E8D6500E902C2 /* ErrorTypes.swift in Sources */,
 				B7311FC81B9A6FF0006CD61D /* UdacityConvenience.swift in Sources */,
 				B7311FC21B9A6307006CD61D /* UdacityClient.swift in Sources */,
+				B7318E971BAB7848007F1C36 /* Reachability.swift in Sources */,
 				B7A8679F1B9C3C67004F80DE /* ParseClient.swift in Sources */,
 				B7A8679A1B9B7FF1004F80DE /* OnTheMapUser.swift in Sources */,
 				B7A867981B9B7AD6004F80DE /* MapViewController.swift in Sources */,
@@ -400,6 +406,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -471,6 +478,7 @@
 				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.basetech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -486,6 +494,7 @@
 				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.basetech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -504,6 +513,7 @@
 				);
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.basetech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheMap.app/OnTheMap";
 			};
@@ -519,6 +529,7 @@
 				);
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.basetech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheMap.app/OnTheMap";
 			};

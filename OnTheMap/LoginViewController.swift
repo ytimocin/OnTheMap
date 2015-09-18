@@ -72,22 +72,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     
     func performLogin(email: String, password: String) {
         
-        startLoginAnimation()
+        /*if Reachability.isConnectedToNetwork() {*/
         
-        UdacityClient.sharedInstance().authenticateWithCompletionHandler(email, password: password) { (success, error) in
+            startLoginAnimation()
+        
+            UdacityClient.sharedInstance().authenticateWithCompletionHandler(email, password: password) { (success, error) in
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.stopLoginAnimation()
-                })
-                
-                if success {
-                    self.completeLogin()
-                } else {
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.showErrorView(error)
+                        self.stopLoginAnimation()
                     })
-                }
-        }
+                
+                    if success {
+                        self.completeLogin()
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.showErrorView(error)
+                        })
+                    }
+            }
+        //} else {
+            
+          //  self.errorMessageLabel.text = "No Internet Connection!"
+            
+        //}
     }
     
     func performLogin(token: String) {
@@ -116,29 +123,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         
         self.view.endEditing(true)
         
-        if emailTextField.text.isEmpty {
+        if emailTextField.text!.isEmpty {
             
             let userInfo: NSDictionary = [
                 NSLocalizedDescriptionKey: "Email Empty"]
             
-            var errorObject = NSError(domain: "OTMErrorDomain", code: ErrorTypes.Client.rawValue,
+            let errorObject = NSError(domain: "OTMErrorDomain", code: ErrorTypes.Client.rawValue,
                 userInfo: userInfo as [NSObject : AnyObject])
             
             self.showErrorView(errorObject)
             
-        } else if passwordTextField.text.isEmpty {
+        } else if passwordTextField.text!.isEmpty {
             
             let userInfo: NSDictionary = [
                 NSLocalizedDescriptionKey: "Password Empty"]
             
-            var errorObject = NSError(domain: "OTMErrorDomain", code: ErrorTypes.Client.rawValue,
+            let errorObject = NSError(domain: "OTMErrorDomain", code: ErrorTypes.Client.rawValue,
                 userInfo: userInfo as [NSObject : AnyObject])
             
             self.showErrorView(errorObject)
             
         } else {
             
-            performLogin(emailTextField.text, password: passwordTextField.text)
+            performLogin(emailTextField.text!, password: passwordTextField.text!)
             
         }
     }
@@ -230,8 +237,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         case .Network:
             imageName = "network"
             self.retryButton.hidden = false
-        default:
-            imageName = "client"
         }
         
         // the images are taken from the noun project
@@ -283,7 +288,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                     
                 } else {
                     
-                    self.performLogin(self.emailTextField.text, password: self.passwordTextField.text)
+                    self.performLogin(self.emailTextField.text!, password: self.passwordTextField.text!)
                     
                 }
                 

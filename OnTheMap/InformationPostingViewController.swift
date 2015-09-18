@@ -58,7 +58,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             }
             
             if let mediaURL = currentUser.mediaURL {
-                self.linkTextField.text = currentUser.mediaURL!
+                self.linkTextField.text = mediaURL
             }
             
         }
@@ -80,7 +80,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func browseLink(sender: AnyObject) {
         let app = UIApplication.sharedApplication()
-        app.openURL(NSURL(string: linkTextField.text)!)
+        app.openURL(NSURL(string: linkTextField.text!)!)
     }
     
     @IBAction func findOnTheMap(sender: AnyObject) {
@@ -88,33 +88,32 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         activityIndicator.startAnimating()
         self.view.alpha = 0.5
         
-        geocoder.geocodeAddressString(locationTextField.text,
-            completionHandler: { (placemarks:[AnyObject]!, error: NSError!) -> Void in
+        geocoder.geocodeAddressString(locationTextField.text!, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.view.alpha = 1.0
                     self.activityIndicator.stopAnimating()
                 })
                 
-                if error == nil && placemarks.count > 0 {
+                if error == nil && placemarks!.count > 0 {
                     
-                    let placemark = placemarks[0] as! CLPlacemark
+                    let placemark: CLPlacemark = placemarks![0] as CLPlacemark
                     
                     self.studyingLocation = placemark.location
                     
-                    var annotation = MKPointAnnotation()
-                    annotation.coordinate = placemark.location.coordinate
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = placemark.location!.coordinate
                     
                     var region = MKCoordinateRegion()
-                    region.center = placemark.location.coordinate
+                    region.center = placemark.location!.coordinate
                     
                     /* The app zooms the map into an appropriate region based
                     on the available information */
                     
-                    if let thoroughfare = placemark.thoroughfare {
+                    if placemark.thoroughfare != nil {
                         region.span.latitudeDelta = 0.2
                         region.span.longitudeDelta = 0.2
-                    } else if let locality = placemark.locality {
+                    } else if placemark.locality != nil {
                         region.span.latitudeDelta = 0.5
                         region.span.longitudeDelta = 0.5
                     } else {
@@ -142,7 +141,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
                     
                 } else {
                     
-                    let alertController = UIAlertController(title: nil, message: "The geocoding operation could not be completed.", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: nil, message: "Network is off ?!", preferredStyle: .Alert)
                     
                     let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
                     }
@@ -166,9 +165,9 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         userInfo["longitude"] = self.studyingLocation?.coordinate.longitude
         userInfo["firstName"] = UdacityClient.sharedInstance().currentUser?.firstName!
         userInfo["lastName"] = UdacityClient.sharedInstance().currentUser?.lastName!
-        var user = OnTheMapUser(dictionary: userInfo)
+        let user = OnTheMapUser(dictionary: userInfo)
         
-        if let objectID = UdacityClient.sharedInstance().currentUser?.objectID {
+        if UdacityClient.sharedInstance().currentUser?.objectID != nil {
             
             ParseClient.sharedInstance().updateUserData(user) { (success, error) in
                 

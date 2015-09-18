@@ -44,30 +44,29 @@ extension ParseClient {
             
             if error != nil {
                 let userInfo: NSDictionary = [
-                    NSLocalizedDescriptionKey: error.localizedDescription]
+                    NSLocalizedDescriptionKey: error!.localizedDescription]
                 
-                var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                 
                 completionHandler(result: nil, error: errorObject)
             }
             else {
                 
                 /* Parse the data */
-                var parsingError: NSError? = nil
-                let parsedJSON = NSJSONSerialization.JSONObjectWithData(data,
-                    options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(data!,
+                    options: NSJSONReadingOptions.AllowFragments)) as! NSDictionary
                 
                 /* Use the data */
                 if let results = parsedJSON.valueForKey(JSONResponseKeys.Results) as? [[String : AnyObject]] {
                     if results.count > 0 {
-                        var currentUser = OnTheMapUser(dictionary: results[0])
+                        let currentUser = OnTheMapUser(dictionary: results[0])
                         completionHandler(result: currentUser, error: nil)
                     }
                     else {
                         
                         let userInfo: NSDictionary = [NSLocalizedDescriptionKey: "Student does not exist"]
                         
-                        var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                        let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                         
                         completionHandler(result: nil, error: errorObject)
                         
@@ -76,7 +75,7 @@ extension ParseClient {
                     
                     let userInfo: NSDictionary = [NSLocalizedDescriptionKey: "Could not parse Student information"]
                     
-                    var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                    let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                     
                     completionHandler(result: nil, error: errorObject)
                     
@@ -114,9 +113,9 @@ extension ParseClient {
             
             if error != nil {
                 
-                let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error.localizedDescription]
+                let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error!.localizedDescription]
                 
-                var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                 
                 completionHandler(result: nil, error: errorObject)
                 
@@ -124,17 +123,16 @@ extension ParseClient {
             else {
                 
                 /* Parse the data */
-                var parsingError: NSError? = nil
-                let parsedJSON = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as! NSDictionary
                 
                 /* Use the data */
                 if let results = parsedJSON.valueForKey(JSONResponseKeys.Results) as? [[String : AnyObject]] {
-                    var students = OnTheMapUser.getOnTheMapUser(results)
+                    let students = OnTheMapUser.getOnTheMapUser(results)
                     completionHandler(result: students, error: nil)
                 } else {
                     let userInfo: NSDictionary = [NSLocalizedDescriptionKey: "No students exist"]
                     
-                    var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                    let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                     
                     completionHandler(result: nil, error: errorObject)
                 }
@@ -148,7 +146,7 @@ extension ParseClient {
     func updateUserData(user: OnTheMapUser, completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         /* Build the URL */
-        var objectID = user.objectID!
+        let objectID = user.objectID!
         let urlString = "https://api.parse.com/1/classes/StudentLocation/\(objectID)"
         let url = NSURL(string: urlString)!
         
@@ -159,7 +157,6 @@ extension ParseClient {
         request.addValue(Constants.RESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        var jsonifyError: NSError? = nil
         let jsonBody : [String:AnyObject] =
         [
             JSONBodyKeys.UniqueKey: user.uniqueKey!,
@@ -170,32 +167,37 @@ extension ParseClient {
             JSONBodyKeys.Latitude: user.latitude!,
             JSONBodyKeys.Longitude: user.longitude!
         ]
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(jsonBody, options: nil, error: &jsonifyError)
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
+        } catch {
+            request.HTTPBody = nil
+            print("exhaustiveness - parse")
+        }
         
         /* Make the request */
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 
-                let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error.localizedDescription]
+                let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error!.localizedDescription]
                 
-                var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                 
                 completionHandler(success: false, error: errorObject)
             }
             else {
                 /* Parse the data */
-                var parsingError: NSError? = nil
-                let parsedJSON = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as! NSDictionary
                 
                 /* Use the data */
                 if let createdAt = parsedJSON.valueForKey(JSONResponseKeys.UpdatedAt) as? String {
+                    print("createAt: \(createdAt)")
                     completionHandler(success: true, error: nil)
                 } else {
                     
                     let userInfo: NSDictionary = [NSLocalizedDescriptionKey: "StudentLocation not updated"]
                     
-                    var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                    let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                     
                     completionHandler(success: false, error: errorObject)
                 }
@@ -219,7 +221,6 @@ extension ParseClient {
         request.addValue(Constants.RESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        var jsonifyError: NSError? = nil
         let jsonBody : [String:AnyObject] =
         [
             JSONBodyKeys.UniqueKey: user.uniqueKey!,
@@ -230,25 +231,29 @@ extension ParseClient {
             JSONBodyKeys.Latitude: user.latitude!,
             JSONBodyKeys.Longitude: user.longitude!
         ]
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(jsonBody, options: nil, error: &jsonifyError)
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
+        } catch {
+            request.HTTPBody = nil
+            print("error")
+        }
         
         /* Make the request */
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 
-                let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error.localizedDescription]
+                let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error!.localizedDescription]
                 
-                var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                 
                 completionHandler(success: false, objectID: nil, error: errorObject)
                 
             }
             else {
                 /* Parse the data */
-                var parsingError: NSError? = nil
-                let parsedJSON = NSJSONSerialization.JSONObjectWithData(data,
-                    options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(data!,
+                    options: NSJSONReadingOptions.AllowFragments)) as! NSDictionary
                 
                 /* Use the data */
                 if let objectID = parsedJSON.valueForKey(JSONResponseKeys.ObjectID) as? String {
@@ -258,7 +263,7 @@ extension ParseClient {
                     let userInfo: NSDictionary = [
                         NSLocalizedDescriptionKey: "StudentLocation not created"]
                     
-                    var errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
+                    let errorObject = NSError(domain: Error.ParseDomainError, code: ErrorTypes.Server.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                     
                     completionHandler(success: false, objectID: nil, error: errorObject)
                 }

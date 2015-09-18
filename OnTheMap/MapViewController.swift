@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
     
     var annotations: [MKPointAnnotation] = [MKPointAnnotation]()
     
@@ -18,6 +18,8 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.mapView.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMap", name: "userDataUpdated", object: nil)
         
@@ -41,41 +43,6 @@ class MapViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        
-        let reuseId = "pin"
-        
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-        
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
-            pinView!.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
-        }
-        else {
-            pinView!.annotation = annotation
-        }
-        
-        return pinView
-    }
-    
-    func logoutButtonTouchUp() {
-        
-        UdacityClient.sharedInstance().logout() { (success, errorString) in
-            if success {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                })
-            }
-        }
-    }
-    
     func updateMap() {
         
         self.mapView.removeAnnotations(self.annotations)
@@ -94,7 +61,7 @@ class MapViewController: UIViewController {
             let coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
             
             // Create the annotation and set its properties
-            var annotation = MKPointAnnotation()
+            let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(user.firstName!) \(user.lastName!)"
             annotation.subtitle = user.mediaURL
@@ -109,16 +76,16 @@ class MapViewController: UIViewController {
         
         UserPins.sharedInstance().users.removeAll(keepCapacity: true)
         
-        var serialQueue = dispatch_queue_create("com.udacity.onthemap.api", DISPATCH_QUEUE_SERIAL)
+        let serialQueue = dispatch_queue_create("com.udacity.onthemap.api", DISPATCH_QUEUE_SERIAL)
         
-        var skips = [0, 100]
+        let skips = [0, 100]
         for skip in skips {
             dispatch_sync( serialQueue ) {
                 
-                ParseClient.sharedInstance().getUsers(skip: skip) { users, error in
+                ParseClient.sharedInstance().getUsers(skip) { users, error in
                     if let users = users {
                         
-                        UserPins.sharedInstance().users.extend(users)
+                        UserPins.sharedInstance().users.appendContentsOf(users)
                         
                         if users.count > 0 {
                             dispatch_async(dispatch_get_main_queue()) {
@@ -137,8 +104,7 @@ class MapViewController: UIViewController {
                         let title: String =  ErrorTypes.localizedDescription(ErrorTypes(rawValue: error!.code)!)
                         let alertController = UIAlertController(title: title, message: error!.localizedDescription, preferredStyle: .Alert)
                         
-                        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                        }
+                        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
                         alertController.addAction(okAction)
                         
                         dispatch_async(dispatch_get_main_queue()) {
@@ -146,7 +112,6 @@ class MapViewController: UIViewController {
                         }
                     }
                 }
-                
             }
         }
     }
@@ -160,7 +125,7 @@ class MapViewController: UIViewController {
             let overwriteAction = UIAlertAction(title: "Overwrite", style: .Default) { (action) in
                 
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewController")
-                    as! UIViewController
+                    
                 self.presentViewController(controller, animated: true, completion: nil)
             }
             
@@ -176,10 +141,48 @@ class MapViewController: UIViewController {
         else {
             
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewController")
-                as! UIViewController
+                
             self.presentViewController(controller, animated: true, completion: nil)
         }
         
+    }
+    
+    func logoutButtonTouchUp() {
+        
+        UdacityClient.sharedInstance().logout() { (success, errorString) in
+            if success {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+        }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinColor = .Red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .InfoDark)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == annotationView.rightCalloutAccessoryView {
+            let app = UIApplication.sharedApplication()
+            app.openURL(NSURL(string: annotationView.annotation!.subtitle!!)!)
+        }
     }
     
 }

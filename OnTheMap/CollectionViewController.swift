@@ -56,7 +56,7 @@ class CollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UserLocationCollectionViewCell
         let userInformation = UserPins.sharedInstance().users[indexPath.row]
         
-        cell.label.text = prefix(userInformation.firstName!, 1) + prefix(userInformation.lastName!, 1)
+        cell.label.text = String((userInformation.firstName!).characters.prefix(1)) + String((userInformation.lastName!).characters.prefix(1))
         
         return cell
     }
@@ -86,15 +86,15 @@ class CollectionViewController: UICollectionViewController {
         
         UserPins.sharedInstance().users.removeAll(keepCapacity: true)
         
-        var serialQueue = dispatch_queue_create("com.udacity.onthemap.api", DISPATCH_QUEUE_SERIAL)
+        let serialQueue = dispatch_queue_create("com.udacity.onthemap.api", DISPATCH_QUEUE_SERIAL)
         
-        var skips = [0, 100]
+        let skips = [0, 100]
         for skip in skips {
             dispatch_sync( serialQueue ) {
                 
-                ParseClient.sharedInstance().getUsers(skip: skip) { users, error in
+                ParseClient.sharedInstance().getUsers(skip) { users, error in
                     if let users = users {
-                        UserPins.sharedInstance().users.extend(users)
+                        UserPins.sharedInstance().users.appendContentsOf(users)
                         
                         if users.count > 0 {
                             dispatch_async(dispatch_get_main_queue()) {
@@ -131,7 +131,7 @@ class CollectionViewController: UICollectionViewController {
             let overwriteAction = UIAlertAction(title: "Overwrite", style: .Default) { (action) in
                 
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewController")
-                    as! UIViewController
+                    
                 self.presentViewController(controller, animated: true, completion: nil)
             }
             
@@ -147,7 +147,7 @@ class CollectionViewController: UICollectionViewController {
         else {
             
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewController")
-                as! UIViewController
+                
             self.presentViewController(controller, animated: true, completion: nil)
         }
         

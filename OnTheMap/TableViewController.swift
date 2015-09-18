@@ -47,7 +47,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TableViewCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TableViewCell", forIndexPath: indexPath)
         let userInformation = UserPins.sharedInstance().users[indexPath.row]
         
         cell.textLabel?.text = userInformation.firstName! + " " + userInformation.lastName!
@@ -60,6 +60,10 @@ class TableViewController: UITableViewController {
         let userInformation = UserPins.sharedInstance().users[indexPath.row]
         let link = NSURL(string: userInformation.mediaURL!)!
         UIApplication.sharedApplication().openURL(link)
+    }
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     // MARK: - Logout
@@ -81,15 +85,15 @@ class TableViewController: UITableViewController {
         
         UserPins.sharedInstance().users.removeAll(keepCapacity: true)
         
-        var serialQueue = dispatch_queue_create("com.udacity.onthemap.api", DISPATCH_QUEUE_SERIAL)
+        let serialQueue = dispatch_queue_create("com.udacity.onthemap.api", DISPATCH_QUEUE_SERIAL)
         
-        var skips = [0, 100]
+        let skips = [0, 100]
         for skip in skips {
             dispatch_sync( serialQueue ) {
                 
-                ParseClient.sharedInstance().getUsers(skip: skip) { users, error in
+                ParseClient.sharedInstance().getUsers(skip) { users, error in
                     if let users = users {
-                        UserPins.sharedInstance().users.extend(users)
+                        UserPins.sharedInstance().users.appendContentsOf(users)
                         
                         if users.count > 0 {
                             dispatch_async(dispatch_get_main_queue()) {
@@ -126,7 +130,7 @@ class TableViewController: UITableViewController {
             let overwriteAction = UIAlertAction(title: "Overwrite", style: .Default) { (action) in
                 
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewController")
-                    as! UIViewController
+                    
                 self.presentViewController(controller, animated: true, completion: nil)
             }
             
@@ -142,7 +146,7 @@ class TableViewController: UITableViewController {
         else {
             
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewController")
-                as! UIViewController
+                
             self.presentViewController(controller, animated: true, completion: nil)
         }
         
