@@ -72,7 +72,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     
     func performLogin(email: String, password: String) {
         
-        /*if Reachability.isConnectedToNetwork() {*/
+        if Reachability.isConnectedToNetwork() {
         
             startLoginAnimation()
         
@@ -90,11 +90,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                         })
                     }
             }
-        //} else {
+        } else {
             
-          //  self.errorMessageLabel.text = "No Internet Connection!"
+            self.errorMessageLabel.text = "No Internet Connection!"
             
-        //}
+        }
     }
     
     func performLogin(token: String) {
