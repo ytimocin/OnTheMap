@@ -64,15 +64,13 @@ class UdacityClient : NSObject {
         let urlString = Constants.UdacityURLSecure + method + UdacityClient.escapedParameters(mutableParameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
-        var jsonifyError: NSError? = nil
         
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
-        } catch let error as NSError {
-            jsonifyError = error
+        } catch {
             request.HTTPBody = nil
         }
         

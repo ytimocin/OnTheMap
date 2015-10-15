@@ -8,10 +8,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     var annotations: [MKPointAnnotation] = [MKPointAnnotation]()
+    
+    var locationmgr : CLLocationManager!
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,6 +23,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.mapView.delegate = self
+        
+        locationmgr = CLLocationManager()
+        locationmgr.requestWhenInUseAuthorization()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMap", name: "userDataUpdated", object: nil)
         

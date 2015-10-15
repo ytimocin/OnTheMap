@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B70062141BCF7DFE00EC8FAE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B70062131BCF7DFE00EC8FAE /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
+		B70062161BCF865D00EC8FAE /* IndentedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70062151BCF865D00EC8FAE /* IndentedTextField.swift */; settings = {ASSET_TAGS = (); }; };
 		B70B29561B9E8B5500E902C2 /* UserPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70B29551B9E8B5500E902C2 /* UserPins.swift */; };
 		B70B29581B9E8D6500E902C2 /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70B29571B9E8D6500E902C2 /* ErrorTypes.swift */; };
 		B70EBE751B9F84B10004E1A5 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70EBE741B9F84B00004E1A5 /* InformationPostingViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B70062131BCF7DFE00EC8FAE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B70062151BCF865D00EC8FAE /* IndentedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndentedTextField.swift; sourceTree = "<group>"; };
 		B70B29551B9E8B5500E902C2 /* UserPins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPins.swift; sourceTree = "<group>"; };
 		B70B29571B9E8D6500E902C2 /* ErrorTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
 		B70EBE741B9F84B00004E1A5 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */,
+				B70062151BCF865D00EC8FAE /* IndentedTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 		B7198F341B95B267008F32A3 = {
 			isa = PBXGroup;
 			children = (
+				B70062131BCF7DFE00EC8FAE /* Default-568h@2x.png */,
 				B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */,
 				B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */,
 				B7198F3F1B95B268008F32A3 /* OnTheMap */,
@@ -307,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7198F481B95B269008F32A3 /* Main.storyboard in Resources */,
+				B70062141BCF7DFE00EC8FAE /* Default-568h@2x.png in Resources */,
 				B7198F4D1B95B269008F32A3 /* LaunchScreen.xib in Resources */,
 				B7198F4A1B95B269008F32A3 /* Images.xcassets in Resources */,
 			);
@@ -339,6 +346,7 @@
 				B7198F431B95B269008F32A3 /* AppDelegate.swift in Sources */,
 				B70B29581B9E8D6500E902C2 /* ErrorTypes.swift in Sources */,
 				B7311FC81B9A6FF0006CD61D /* UdacityConvenience.swift in Sources */,
+				B70062161BCF865D00EC8FAE /* IndentedTextField.swift in Sources */,
 				B7311FC21B9A6307006CD61D /* UdacityClient.swift in Sources */,
 				B7318E971BAB7848007F1C36 /* Reachability.swift in Sources */,
 				B7A8679F1B9C3C67004F80DE /* ParseClient.swift in Sources */,

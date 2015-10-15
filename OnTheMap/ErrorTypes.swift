@@ -23,8 +23,6 @@ enum ErrorTypes: Int {
             return "Network Error"
         case .Server:
             return "Server Error"
-        default:
-            return "Unknown Error"
         }
         
     }

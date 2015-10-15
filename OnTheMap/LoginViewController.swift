@@ -228,7 +228,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     func showErrorView(error: NSError!) {
         
         let errorType = ErrorTypes(rawValue: error.code)
+        
         var imageName: String?
+        imageName = "client"
+        
         switch (errorType!) {
         case .Client:
             imageName = "client"
