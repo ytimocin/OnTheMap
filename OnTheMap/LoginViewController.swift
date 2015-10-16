@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        errorViewTopConstraint.constant += errorView.frame.size.height
+        errorViewTopConstraint.constant += errorView.frame.size.height * 2
         
         let placeHolderTextColor: UIColor = UIColor.whiteColor()
         
@@ -92,7 +92,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
             }
         } else {
             
-            self.errorMessageLabel.text = "No Internet Connection!"
+            let error = NSError(domain: "Network Error", code: ErrorTypes.Network.rawValue, userInfo: nil)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.showErrorView(error)
+            })
             
         }
     }
@@ -264,7 +268,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     
     @IBAction func okButton(sender: AnyObject) {
         
-        self.errorViewTopConstraint.constant += errorView.frame.size.height
+        self.errorViewTopConstraint.constant += errorView.frame.size.height * 2
         self.errorView.setNeedsUpdateConstraints()
         
         self.retryButton.hidden = true
@@ -276,7 +280,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     
     @IBAction func retryButton(sender: AnyObject) {
         
-        self.errorViewTopConstraint.constant += errorView.frame.size.height
+        self.errorViewTopConstraint.constant += errorView.frame.size.height * 2
         self.errorView.setNeedsUpdateConstraints()
         
         self.retryButton.hidden = true

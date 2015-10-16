@@ -89,11 +89,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             dispatch_sync( serialQueue ) {
                 
                 ParseClient.sharedInstance().getUsers(skip) { users, error in
-                    if let users = users {
+                    if error == nil {
                         
-                        UserPins.sharedInstance().users.appendContentsOf(users)
+                        UserPins.sharedInstance().users.appendContentsOf(users!)
                         
-                        if users.count > 0 {
+                        if users!.count > 0 {
                             dispatch_async(dispatch_get_main_queue()) {
                                 NSNotificationCenter.defaultCenter().postNotificationName("userDataUpdated", object: nil)
                             }

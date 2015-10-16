@@ -27,12 +27,12 @@
 		B76670001BA5939300831031 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7666FFF1BA5939200831031 /* CollectionViewController.swift */; };
 		B76670021BA5961E00831031 /* UserLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */; };
 		B79EE9E01B9E139D00529819 /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79EE9DF1B9E139D00529819 /* ParseConvenience.swift */; };
-		B7A53F8F1BAA2CBD0090DC16 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */; };
-		B7A53F901BAA2CBD0090DC16 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */; };
 		B7A867981B9B7AD6004F80DE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A867971B9B7AD6004F80DE /* MapViewController.swift */; };
 		B7A8679A1B9B7FF1004F80DE /* OnTheMapUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A867991B9B7FF0004F80DE /* OnTheMapUser.swift */; };
 		B7A8679F1B9C3C67004F80DE /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A8679E1B9C3C67004F80DE /* ParseClient.swift */; };
 		B7A867A11B9C3CB2004F80DE /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A867A01B9C3CB2004F80DE /* ParseConstants.swift */; };
+		B7FB0A161BD0B427008B6553 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FB0A141BD0B427008B6553 /* FBSDKCoreKit.framework */; };
+		B7FB0A171BD0B427008B6553 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FB0A151BD0B427008B6553 /* FBSDKLoginKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,12 +70,12 @@
 		B7666FFF1BA5939200831031 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		B76670011BA5961E00831031 /* UserLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B79EE9DF1B9E139D00529819 /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
-		B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		B7A867971B9B7AD6004F80DE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B7A867991B9B7FF0004F80DE /* OnTheMapUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapUser.swift; sourceTree = "<group>"; };
 		B7A8679E1B9C3C67004F80DE /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		B7A867A01B9C3CB2004F80DE /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
+		B7FB0A141BD0B427008B6553 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		B7FB0A151BD0B427008B6553 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7A53F8F1BAA2CBD0090DC16 /* FBSDKCoreKit.framework in Frameworks */,
-				B7A53F901BAA2CBD0090DC16 /* FBSDKLoginKit.framework in Frameworks */,
+				B7FB0A161BD0B427008B6553 /* FBSDKCoreKit.framework in Frameworks */,
+				B7FB0A171BD0B427008B6553 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,9 +163,9 @@
 		B7198F341B95B267008F32A3 = {
 			isa = PBXGroup;
 			children = (
+				B7FB0A141BD0B427008B6553 /* FBSDKCoreKit.framework */,
+				B7FB0A151BD0B427008B6553 /* FBSDKLoginKit.framework */,
 				B70062131BCF7DFE00EC8FAE /* Default-568h@2x.png */,
-				B7A53F8D1BAA2CBD0090DC16 /* FBSDKCoreKit.framework */,
-				B7A53F8E1BAA2CBD0090DC16 /* FBSDKLoginKit.framework */,
 				B7198F3F1B95B268008F32A3 /* OnTheMap */,
 				B7198F551B95B26B008F32A3 /* OnTheMapTests */,
 				B7198F3E1B95B268008F32A3 /* Products */,

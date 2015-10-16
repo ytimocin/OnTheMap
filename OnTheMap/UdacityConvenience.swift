@@ -197,8 +197,7 @@ extension UdacityClient {
                 
                 let userInfo: NSDictionary = [NSLocalizedDescriptionKey: error.localizedDescription]
                 
-                let errorObject = NSError(domain: UdacityClient.Error.UdacityDomainError, code: ErrorTypes.Network.rawValue,
-                    userInfo: userInfo as [NSObject : AnyObject])
+                let errorObject = NSError(domain: UdacityClient.Error.UdacityDomainError, code: ErrorTypes.Network.rawValue, userInfo: userInfo as [NSObject : AnyObject])
                 
                 completionHandler(success: false, firstName: nil, lastName: nil, error: errorObject)
                 
